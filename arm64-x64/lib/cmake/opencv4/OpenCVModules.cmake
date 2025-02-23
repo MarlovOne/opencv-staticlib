@@ -19,7 +19,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_cmake_targets_defined "")
 set(_cmake_targets_not_defined "")
 set(_cmake_expected_targets "")
-foreach(_cmake_expected_target IN ITEMS zlib libjpeg-turbo ittnotify opencv_core opencv_imgproc)
+foreach(_cmake_expected_target IN ITEMS zlib libjpeg-turbo ittnotify opencv_core opencv_imgproc opencv_features2d)
   list(APPEND _cmake_expected_targets "${_cmake_expected_target}")
   if(TARGET "${_cmake_expected_target}")
     list(APPEND _cmake_targets_defined "${_cmake_expected_target}")
@@ -80,6 +80,13 @@ add_library(opencv_imgproc STATIC IMPORTED)
 
 set_target_properties(opencv_imgproc PROPERTIES
   INTERFACE_LINK_LIBRARIES "opencv_core;opencv_core;\$<LINK_ONLY:Eigen3::Eigen>"
+)
+
+# Create imported target opencv_features2d
+add_library(opencv_features2d STATIC IMPORTED)
+
+set_target_properties(opencv_features2d PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc;\$<LINK_ONLY:Eigen3::Eigen>"
 )
 
 # Load information for each installed configuration.
