@@ -2,7 +2,7 @@
 
 # Get script directory
 $SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Definition
-Push-Location "$SCRIPT_DIR\.."  # Move to the parent directory of the script
+Push-Location "$SCRIPT_DIR"  # Move to the parent directory of the script
 
 # Function to manually build OpenCV for a given architecture
 function Install-OpenCV {
@@ -27,7 +27,7 @@ function Install-OpenCV {
     # Define paths
     $OpenCVRepo = "https://github.com/opencv/opencv.git"
     $BuildDir = "$PWD\build\Windows\opencv\$ARCH"
-    $InstallDir = "$PWD\install\Windows\opencv\$ARCH"
+    $InstallDir = "$PWD\$ARCH"
 
     # Remove previous build and artifacts
     Remove-Item -Recurse -Force $BuildDir -ErrorAction SilentlyContinue
@@ -51,7 +51,7 @@ function Install-OpenCV {
             -DCPU_BASELINE="" `
             -DCPU_DISPATCH="" `
             -DWITH_IPP=OFF `
-            -DBUILD_LIST="core,imgproc,apps" `
+            -DBUILD_LIST="core,imgproc,apps,features2d" `
             -DOPENCV_GENERATE_PKGCONFIG=ON `
             -DOPENCV_GENERATE_CONFIG_FILE=ON `
             -DBUILD_SHARED_LIBS=OFF `
@@ -60,7 +60,7 @@ function Install-OpenCV {
             -DBUILD_SHARED_LIBS=OFF `
             -DBUILD_opencv_flann=OFF `
             -DBUILD_opencv_dnn=OFF `
-            -DBUILD_opencv_features2d=OFF `
+            -DBUILD_opencv_features2d=ON `
             -DBUILD_opencv_photo=OFF `
             -DBUILD_opencv_objdetect=OFF `
             -DBUILD_opencv_ml=OFF `
@@ -96,13 +96,13 @@ function Install-OpenCV {
             -DCPU_BASELINE="" `
             -DCPU_DISPATCH="" `
             -DWITH_IPP=OFF `
-            -DBUILD_LIST="core,imgproc,apps" `
+            -DBUILD_LIST="core,imgproc,apps,features2d" `
             -DBUILD_SHARED_LIBS=OFF `
             -DOPENCV_GENERATE_PKGCONFIG=ON `
             -DOPENCV_GENERATE_CONFIG_FILE=ON `
             -DBUILD_opencv_flann=OFF `
             -DBUILD_opencv_dnn=OFF `
-            -DBUILD_opencv_features2d=OFF `
+            -DBUILD_opencv_features2d=ON `
             -DBUILD_opencv_photo=OFF `
             -DBUILD_opencv_objdetect=OFF `
             -DBUILD_opencv_ml=OFF `

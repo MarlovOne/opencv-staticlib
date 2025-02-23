@@ -55,5 +55,15 @@ set_target_properties(opencv_imgproc PROPERTIES
 list(APPEND _cmake_import_check_targets opencv_imgproc )
 list(APPEND _cmake_import_check_files_for_opencv_imgproc "${_IMPORT_PREFIX}/x64/vc17/staticlib/opencv_imgproc4110.lib" )
 
+# Import target "opencv_features2d" for configuration "Release"
+set_property(TARGET opencv_features2d APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_features2d PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/x64/vc17/staticlib/opencv_features2d4110.lib"
+  )
+
+list(APPEND _cmake_import_check_targets opencv_features2d )
+list(APPEND _cmake_import_check_files_for_opencv_features2d "${_IMPORT_PREFIX}/x64/vc17/staticlib/opencv_features2d4110.lib" )
+
 # Commands beyond this point should not need to know the version.
 set(CMAKE_IMPORT_FILE_VERSION)
