@@ -4,7 +4,7 @@
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 
 # Push to parent directory of scripts folder
-pushd "${SCRIPT_DIR}/.." > /dev/null
+pushd "${SCRIPT_DIR}" > /dev/null
 
 install_opencv_linux() {
   git clone --depth 1 --branch 4.11.0 https://github.com/opencv/opencv.git
@@ -21,14 +21,14 @@ install_opencv_linux() {
         -G Ninja \
         -S opencv \
         -B ./build/Linux/opencv/$ARCH \
-        -DBUILD_LIST=core,imgproc \
+        -DBUILD_LIST=core,imgproc,features2d \
         -DCMAKE_BUILD_TYPE=Release \
         -DOPENCV_GENERATE_PKGCONFIG=ON \
         -DOPENCV_GENERATE_CONFIG_FILE=ON \
         -DBUILD_SHARED_LIBS=OFF \
         -DBUILD_opencv_flann=OFF \
         -DBUILD_opencv_dnn=OFF \
-        -DBUILD_opencv_features2d=OFF \
+        -DBUILD_opencv_features2d=ON \
         -DBUILD_opencv_photo=OFF \
         -DBUILD_opencv_objdetect=OFF \
         -DBUILD_opencv_ml=OFF \
@@ -55,19 +55,20 @@ install_opencv_linux() {
         -DBUILD_TESTS=OFF \
         -DBUILD_PERF_TESTS=OFF \
         -DBUILD_DOCS=OFF \
-        -DCMAKE_TOOLCHAIN_FILE=$(pwd)/api/cmake/toolchain/linux-arm64.cmake
+        -DCMAKE_TOOLCHAIN_FILE=$(pwd)/linux-arm64.cmake
  
     elif [ "$ARCH" = "x86_64" ]; then
       cmake \
         -G Ninja \
         -S opencv \
         -B ./build/Linux/opencv/$ARCH \
-        -DBUILD_LIST=core,imgproc \
+        -DBUILD_LIST=core,imgproc,features2d,highgui,video,videoio \
         -DCMAKE_BUILD_TYPE=Release \
         -DBUILD_SHARED_LIBS=OFF \
         -DBUILD_PROTOBUFF=OFF \
         -DWITH_ADE=OFF \
-        -DWITH_PROTOBUF=OFF
+        -DWITH_PROTOBUF=OFF \
+        -DWITH_GTK=ON
 
     else 
       return 1
