@@ -21,12 +21,13 @@ install_opencv_linux() {
         -G Ninja \
         -S opencv \
         -B ./build/Linux/opencv/$ARCH \
-        -DBUILD_LIST=core,imgproc,features2d \
+        -DBUILD_LIST=core,imgproc,features2d,flann,calib3d \
         -DCMAKE_BUILD_TYPE=Release \
         -DOPENCV_GENERATE_PKGCONFIG=ON \
         -DOPENCV_GENERATE_CONFIG_FILE=ON \
         -DBUILD_SHARED_LIBS=OFF \
-        -DBUILD_opencv_flann=OFF \
+        -DBUILD_opencv_flann=ON \
+        -DBUILD_opencv_calib3d=ON \
         -DBUILD_opencv_dnn=OFF \
         -DBUILD_opencv_features2d=ON \
         -DBUILD_opencv_photo=OFF \
@@ -62,7 +63,7 @@ install_opencv_linux() {
         -G Ninja \
         -S opencv \
         -B ./build/Linux/opencv/$ARCH \
-        -DBUILD_LIST=core,imgproc,features2d,highgui,video,videoio \
+        -DBUILD_LIST=core,imgproc,features2d,highgui,video,videoio,flann,calib3d \
         -DCMAKE_BUILD_TYPE=Release \
         -DBUILD_SHARED_LIBS=OFF \
         -DBUILD_PROTOBUFF=OFF \

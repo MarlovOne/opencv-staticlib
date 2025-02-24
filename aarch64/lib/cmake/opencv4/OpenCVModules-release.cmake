@@ -45,6 +45,16 @@ set_target_properties(opencv_core PROPERTIES
 list(APPEND _cmake_import_check_targets opencv_core )
 list(APPEND _cmake_import_check_files_for_opencv_core "${_IMPORT_PREFIX}/lib/libopencv_core.a" )
 
+# Import target "opencv_flann" for configuration "Release"
+set_property(TARGET opencv_flann APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_flann PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libopencv_flann.a"
+  )
+
+list(APPEND _cmake_import_check_targets opencv_flann )
+list(APPEND _cmake_import_check_files_for_opencv_flann "${_IMPORT_PREFIX}/lib/libopencv_flann.a" )
+
 # Import target "opencv_imgproc" for configuration "Release"
 set_property(TARGET opencv_imgproc APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(opencv_imgproc PROPERTIES
@@ -64,6 +74,16 @@ set_target_properties(opencv_features2d PROPERTIES
 
 list(APPEND _cmake_import_check_targets opencv_features2d )
 list(APPEND _cmake_import_check_files_for_opencv_features2d "${_IMPORT_PREFIX}/lib/libopencv_features2d.a" )
+
+# Import target "opencv_calib3d" for configuration "Release"
+set_property(TARGET opencv_calib3d APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_calib3d PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libopencv_calib3d.a"
+  )
+
+list(APPEND _cmake_import_check_targets opencv_calib3d )
+list(APPEND _cmake_import_check_files_for_opencv_calib3d "${_IMPORT_PREFIX}/lib/libopencv_calib3d.a" )
 
 # Commands beyond this point should not need to know the version.
 set(CMAKE_IMPORT_FILE_VERSION)
