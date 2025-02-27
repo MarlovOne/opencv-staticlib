@@ -19,7 +19,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_cmake_targets_defined "")
 set(_cmake_targets_not_defined "")
 set(_cmake_expected_targets "")
-foreach(_cmake_expected_target IN ITEMS zlib libjpeg-turbo ittnotify opencv_core opencv_imgproc opencv_features2d)
+foreach(_cmake_expected_target IN ITEMS zlib libjpeg-turbo ittnotify opencv_core opencv_flann opencv_imgproc opencv_features2d opencv_calib3d)
   list(APPEND _cmake_expected_targets "${_cmake_expected_target}")
   if(TARGET "${_cmake_expected_target}")
     list(APPEND _cmake_targets_defined "${_cmake_expected_target}")
@@ -75,6 +75,13 @@ set_target_properties(opencv_core PROPERTIES
   INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:zlib>;\$<LINK_ONLY:ittnotify>"
 )
 
+# Create imported target opencv_flann
+add_library(opencv_flann STATIC IMPORTED)
+
+set_target_properties(opencv_flann PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_core"
+)
+
 # Create imported target opencv_imgproc
 add_library(opencv_imgproc STATIC IMPORTED)
 
@@ -86,7 +93,14 @@ set_target_properties(opencv_imgproc PROPERTIES
 add_library(opencv_features2d STATIC IMPORTED)
 
 set_target_properties(opencv_features2d PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_flann;opencv_imgproc;opencv_core;opencv_flann;opencv_imgproc"
+)
+
+# Create imported target opencv_calib3d
+add_library(opencv_calib3d STATIC IMPORTED)
+
+set_target_properties(opencv_calib3d PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_flann;opencv_imgproc;opencv_features2d;opencv_core;opencv_flann;opencv_imgproc;opencv_features2d"
 )
 
 # Load information for each installed configuration.
