@@ -19,7 +19,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_cmake_targets_defined "")
 set(_cmake_targets_not_defined "")
 set(_cmake_expected_targets "")
-foreach(_cmake_expected_target IN ITEMS libjpeg-turbo ippiw ittnotify opencv_core opencv_flann opencv_imgproc opencv_features2d opencv_imgcodecs ocv.3rdparty.gstreamer ocv.3rdparty.v4l ocv.3rdparty.ffmpeg ocv.3rdparty.ffmpeg.builtin_deps ocv.3rdparty.obsensor opencv_videoio opencv_calib3d ocv.3rdparty.gtk3 opencv_highgui opencv_video)
+foreach(_cmake_expected_target IN ITEMS libjpeg-turbo ippiw ittnotify opencv_core opencv_flann opencv_imgproc opencv_features2d opencv_imgcodecs ocv.3rdparty.v4l ocv.3rdparty.ffmpeg ocv.3rdparty.ffmpeg.builtin_deps ocv.3rdparty.obsensor opencv_videoio opencv_calib3d ocv.3rdparty.gtk3 opencv_highgui opencv_video)
   list(APPEND _cmake_expected_targets "${_cmake_expected_target}")
   if(TARGET "${_cmake_expected_target}")
     list(APPEND _cmake_targets_defined "${_cmake_expected_target}")
@@ -103,14 +103,6 @@ set_target_properties(opencv_imgcodecs PROPERTIES
   INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc;\$<LINK_ONLY:dl>;\$<LINK_ONLY:m>;\$<LINK_ONLY:pthread>;\$<LINK_ONLY:rt>;\$<LINK_ONLY:ippiw>;\$<LINK_ONLY:ippicv>;\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:libjpeg-turbo>;/usr/lib/x86_64-linux-gnu/libwebp.so;/usr/lib/x86_64-linux-gnu/libwebpmux.so;/usr/lib/x86_64-linux-gnu/libwebpdemux.so;/usr/lib/x86_64-linux-gnu/libpng.so;/usr/lib/x86_64-linux-gnu/libz.so;/usr/lib/x86_64-linux-gnu/libtiff.so;\$<LINK_ONLY:openjp2>;/usr/lib/x86_64-linux-gnu/libImath.so;/usr/lib/x86_64-linux-gnu/libIlmImf.so;/usr/lib/x86_64-linux-gnu/libIex.so;/usr/lib/x86_64-linux-gnu/libHalf.so;/usr/lib/x86_64-linux-gnu/libIlmThread.so;/usr/lib/x86_64-linux-gnu/libz.so"
 )
 
-# Create imported target ocv.3rdparty.gstreamer
-add_library(ocv.3rdparty.gstreamer INTERFACE IMPORTED)
-
-set_target_properties(ocv.3rdparty.gstreamer PROPERTIES
-  INTERFACE_COMPILE_DEFINITIONS "HAVE_GSTREAMER"
-  INTERFACE_LINK_LIBRARIES "/usr/lib/x86_64-linux-gnu/libgstbase-1.0.so;/usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so;/usr/lib/x86_64-linux-gnu/libgobject-2.0.so;/usr/lib/x86_64-linux-gnu/libglib-2.0.so;/usr/lib/x86_64-linux-gnu/libgstapp-1.0.so;/usr/lib/x86_64-linux-gnu/libgstbase-1.0.so;/usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so;/usr/lib/x86_64-linux-gnu/libgobject-2.0.so;/usr/lib/x86_64-linux-gnu/libglib-2.0.so;/usr/lib/x86_64-linux-gnu/libgstriff-1.0.so;/usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so;/usr/lib/x86_64-linux-gnu/libgobject-2.0.so;/usr/lib/x86_64-linux-gnu/libglib-2.0.so;/usr/lib/x86_64-linux-gnu/libgstpbutils-1.0.so;/usr/lib/x86_64-linux-gnu/libgstaudio-1.0.so;/usr/lib/x86_64-linux-gnu/libgstvideo-1.0.so;/usr/lib/x86_64-linux-gnu/libgstbase-1.0.so;/usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so;/usr/lib/x86_64-linux-gnu/libgobject-2.0.so;/usr/lib/x86_64-linux-gnu/libglib-2.0.so;/usr/lib/x86_64-linux-gnu/libgstvideo-1.0.so;/usr/lib/x86_64-linux-gnu/libgstbase-1.0.so;/usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so;/usr/lib/x86_64-linux-gnu/libgobject-2.0.so;/usr/lib/x86_64-linux-gnu/libglib-2.0.so;/usr/lib/x86_64-linux-gnu/libgstaudio-1.0.so;/usr/lib/x86_64-linux-gnu/libgstbase-1.0.so;/usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so;/usr/lib/x86_64-linux-gnu/libgobject-2.0.so;/usr/lib/x86_64-linux-gnu/libglib-2.0.so"
-)
-
 # Create imported target ocv.3rdparty.v4l
 add_library(ocv.3rdparty.v4l INTERFACE IMPORTED)
 
@@ -140,7 +132,7 @@ set_target_properties(ocv.3rdparty.obsensor PROPERTIES
 add_library(opencv_videoio STATIC IMPORTED)
 
 set_target_properties(opencv_videoio PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_imgcodecs;opencv_core;opencv_imgproc;opencv_imgcodecs;\$<LINK_ONLY:dl>;\$<LINK_ONLY:m>;\$<LINK_ONLY:pthread>;\$<LINK_ONLY:rt>;\$<LINK_ONLY:ippiw>;\$<LINK_ONLY:ippicv>;\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:ocv.3rdparty.gstreamer>;\$<LINK_ONLY:ocv.3rdparty.v4l>;\$<LINK_ONLY:ocv.3rdparty.ffmpeg>;\$<LINK_ONLY:ocv.3rdparty.ffmpeg.builtin_deps>;\$<LINK_ONLY:ocv.3rdparty.obsensor>"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_imgcodecs;opencv_core;opencv_imgproc;opencv_imgcodecs;\$<LINK_ONLY:dl>;\$<LINK_ONLY:m>;\$<LINK_ONLY:pthread>;\$<LINK_ONLY:rt>;\$<LINK_ONLY:ippiw>;\$<LINK_ONLY:ippicv>;\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:ocv.3rdparty.v4l>;\$<LINK_ONLY:ocv.3rdparty.ffmpeg>;\$<LINK_ONLY:ocv.3rdparty.ffmpeg.builtin_deps>;\$<LINK_ONLY:ocv.3rdparty.obsensor>"
 )
 
 # Create imported target opencv_calib3d
