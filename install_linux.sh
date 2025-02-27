@@ -9,7 +9,7 @@ pushd "${SCRIPT_DIR}" > /dev/null
 install_opencv_linux() {
   git clone --depth 1 --branch 4.11.0 https://github.com/opencv/opencv.git
 
-  ARCHS=("x86_64")
+  ARCHS=("aarch64")
 
   for ARCH in "${ARCHS[@]}"; do
     rm -rf ./build/Linux/opencv/$ARCH
@@ -21,7 +21,7 @@ install_opencv_linux() {
         -G Ninja \
         -S opencv \
         -B ./build/Linux/opencv/$ARCH \
-        -DBUILD_LIST=core,imgproc,features2d,flann,calib3d \
+        -DBUILD_LIST=core,imgproc,features2d,flann,calib3d,videoio,video,highgui \
         -DCMAKE_BUILD_TYPE=Release \
         -DOPENCV_GENERATE_PKGCONFIG=ON \
         -DOPENCV_GENERATE_CONFIG_FILE=ON \
@@ -33,9 +33,9 @@ install_opencv_linux() {
         -DBUILD_opencv_photo=OFF \
         -DBUILD_opencv_objdetect=OFF \
         -DBUILD_opencv_ml=OFF \
-        -DBUILD_opencv_video=OFF \
-        -DBUILD_opencv_videoio=OFF \
-        -DBUILD_opencv_highgui=OFF \
+        -DBUILD_opencv_video=ON \
+        -DBUILD_opencv_videoio=ON \
+        -DBUILD_opencv_highgui=ON \
         -DBUILD_opencv_gapi=OFF \
         -DBUILD_PROTOBUFF=OFF \
         -DWITH_ADE=OFF \
@@ -63,7 +63,7 @@ install_opencv_linux() {
         -G Ninja \
         -S opencv \
         -B ./build/Linux/opencv/$ARCH \
-        -DBUILD_LIST=core,imgproc,features2d,highgui,video,videoio,flann,calib3d \
+        -DBUILD_LIST=core,imgproc,features2d,flann,calib3d,videoio,video,highgui \
         -DCMAKE_BUILD_TYPE=Release \
         -DBUILD_SHARED_LIBS=OFF \
         -DBUILD_PROTOBUFF=OFF \
