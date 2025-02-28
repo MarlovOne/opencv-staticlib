@@ -19,7 +19,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_cmake_targets_defined "")
 set(_cmake_targets_not_defined "")
 set(_cmake_expected_targets "")
-foreach(_cmake_expected_target IN ITEMS libjpeg-turbo ippiw ittnotify opencv_core opencv_flann opencv_imgproc opencv_features2d opencv_imgcodecs ocv.3rdparty.v4l ocv.3rdparty.obsensor opencv_videoio opencv_calib3d ocv.3rdparty.gtk3 opencv_highgui opencv_video)
+foreach(_cmake_expected_target IN ITEMS libjpeg-turbo ippiw ittnotify opencv_core opencv_flann opencv_imgproc opencv_features2d opencv_imgcodecs ocv.3rdparty.v4l ocv.3rdparty.ffmpeg ocv.3rdparty.ffmpeg.builtin_deps ocv.3rdparty.obsensor opencv_videoio opencv_calib3d ocv.3rdparty.gtk3 opencv_highgui opencv_video)
   list(APPEND _cmake_expected_targets "${_cmake_expected_target}")
   if(TARGET "${_cmake_expected_target}")
     list(APPEND _cmake_targets_defined "${_cmake_expected_target}")
@@ -110,6 +110,17 @@ set_target_properties(ocv.3rdparty.v4l PROPERTIES
   INTERFACE_COMPILE_DEFINITIONS "HAVE_CAMV4L2"
 )
 
+# Create imported target ocv.3rdparty.ffmpeg
+add_library(ocv.3rdparty.ffmpeg INTERFACE IMPORTED)
+
+set_target_properties(ocv.3rdparty.ffmpeg PROPERTIES
+  INTERFACE_COMPILE_DEFINITIONS "HAVE_FFMPEG"
+  INTERFACE_LINK_LIBRARIES "/usr/lib/x86_64-linux-gnu/libavcodec.so;/usr/lib/x86_64-linux-gnu/libavformat.so;/usr/lib/x86_64-linux-gnu/libavutil.so;/usr/lib/x86_64-linux-gnu/libswscale.so;/usr/lib/x86_64-linux-gnu/libavresample.so"
+)
+
+# Create imported target ocv.3rdparty.ffmpeg.builtin_deps
+add_library(ocv.3rdparty.ffmpeg.builtin_deps INTERFACE IMPORTED)
+
 # Create imported target ocv.3rdparty.obsensor
 add_library(ocv.3rdparty.obsensor INTERFACE IMPORTED)
 
@@ -121,7 +132,7 @@ set_target_properties(ocv.3rdparty.obsensor PROPERTIES
 add_library(opencv_videoio STATIC IMPORTED)
 
 set_target_properties(opencv_videoio PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_imgcodecs;opencv_core;opencv_imgproc;opencv_imgcodecs;\$<LINK_ONLY:dl>;\$<LINK_ONLY:m>;\$<LINK_ONLY:pthread>;\$<LINK_ONLY:rt>;\$<LINK_ONLY:ippiw>;\$<LINK_ONLY:ippicv>;\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:ocv.3rdparty.v4l>;\$<LINK_ONLY:ocv.3rdparty.obsensor>"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_imgcodecs;opencv_core;opencv_imgproc;opencv_imgcodecs;\$<LINK_ONLY:dl>;\$<LINK_ONLY:m>;\$<LINK_ONLY:pthread>;\$<LINK_ONLY:rt>;\$<LINK_ONLY:ippiw>;\$<LINK_ONLY:ippicv>;\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:ocv.3rdparty.v4l>;\$<LINK_ONLY:ocv.3rdparty.ffmpeg>;\$<LINK_ONLY:ocv.3rdparty.ffmpeg.builtin_deps>;\$<LINK_ONLY:ocv.3rdparty.obsensor>"
 )
 
 # Create imported target opencv_calib3d

@@ -52,7 +52,7 @@ install_opencv_linux() {
         -DWITH_IMGCODEC_PXM=OFF \
         -DWITH_IMGCODEC_SUNRASTER=OFF \
         -DWITH_GSTREAMER=OFF \
-        -DWITH_FFMPEG=OFF \
+        -DWITH_FFMPEG=ON \
         -DWITH_QUIRC=OFF \
         -DBUILD_EXAMPLES=OFF \
         -DBUILD_TESTS=OFF \
@@ -71,7 +71,7 @@ install_opencv_linux() {
         -DBUILD_PROTOBUFF=OFF \
         -DWITH_ADE=OFF \
         -DWITH_GSTREAMER=OFF \
-        -DWITH_FFMPEG=OFF \
+        -DWITH_FFMPEG=ON \
         -DBUILD_JPEG=ON \
         -DWITH_PROTOBUF=OFF \
         -DWITH_GTK=ON
