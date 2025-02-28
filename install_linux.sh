@@ -9,7 +9,7 @@ pushd "${SCRIPT_DIR}" > /dev/null
 install_opencv_linux() {
   git clone --depth 1 --branch 4.11.0 https://github.com/opencv/opencv.git
 
-  ARCHS=("x86_64")
+  ARCHS=("x86_64" "aarch64")
 
   for ARCH in "${ARCHS[@]}"; do
     rm -rf ./build/Linux/opencv/$ARCH
@@ -69,6 +69,7 @@ install_opencv_linux() {
         -DBUILD_PROTOBUFF=OFF \
         -DWITH_ADE=OFF \
         -DWITH_GSTREAMER=OFF \
+        -DWITH_FFMPEG=ON \
         -DBUILD_JPEG=ON \
         -DWITH_PROTOBUF=OFF \
         -DWITH_GTK=ON
