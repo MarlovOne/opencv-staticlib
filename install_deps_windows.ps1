@@ -80,6 +80,7 @@ function Install-OpenCV {
             -DBUILD_DOCS=OFF `
             -DBUILD_OPENEXR=ON `
             -DBUILD_JPEG=ON `
+            -DBUILD_PNG=ON `
             -DBUILD_ZLIB=ON `
             -DBUILD_TIFF=ON `
             -DBUILD_OPENJPEG=ON `
@@ -125,6 +126,7 @@ function Install-OpenCV {
             -DBUILD_DOCS=OFF `
             -DBUILD_OPENEXR=ON `
             -DBUILD_JPEG=ON `
+            -DBUILD_PNG=ON `
             -DBUILD_ZLIB=ON `
             -DBUILD_TIFF=ON `
             -DBUILD_OPENJPEG=ON `
