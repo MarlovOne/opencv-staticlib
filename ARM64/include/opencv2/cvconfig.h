@@ -60,7 +60,7 @@
 /* #undef HAVE_VULKAN */
 
 /* Define to 1 if you have the <inttypes.h> header file. */
-/* #undef HAVE_INTTYPES_H */
+#define HAVE_INTTYPES_H 1
 
 /* Intel Integrated Performance Primitives */
 /* #undef HAVE_IPP */
@@ -69,7 +69,7 @@
 /* #undef HAVE_IPP_IW_LL */
 
 /* JPEG-2000 codec */
-/* #undef HAVE_OPENJPEG */
+#define HAVE_OPENJPEG
 /* #undef HAVE_JASPER */
 
 /* AVIF codec */
@@ -101,13 +101,13 @@
 #define HAVE_OPENCL_D3D11_NV
 
 /* OpenEXR codec */
-/* #undef HAVE_OPENEXR */
+#define HAVE_OPENEXR
 
 /* OpenGL support*/
 /* #undef HAVE_OPENGL */
 
 /* PNG codec */
-/* #undef HAVE_PNG */
+#define HAVE_PNG
 
 /* PNG codec */
 /* #undef HAVE_SPNG */
@@ -125,7 +125,7 @@
 /* #undef HAVE_HPX */
 
 /* TIFF codec */
-/* #undef HAVE_TIFF */
+#define HAVE_TIFF
 
 /* Define if your processor stores words with the most significant byte
    first (like Motorola and SPARC, unlike Intel and VAX). */

@@ -3,11 +3,11 @@
 if("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.8)
    message(FATAL_ERROR "CMake >= 2.8.0 required")
 endif()
-if(CMAKE_VERSION VERSION_LESS "2.8.12")
-   message(FATAL_ERROR "CMake >= 2.8.12 required")
+if(CMAKE_VERSION VERSION_LESS "3.0.0")
+   message(FATAL_ERROR "CMake >= 3.0.0 required")
 endif()
 cmake_policy(PUSH)
-cmake_policy(VERSION 2.8.12...3.27)
+cmake_policy(VERSION 3.0.0...3.27)
 #----------------------------------------------------------------
 # Generated CMake target import file.
 #----------------------------------------------------------------
@@ -19,7 +19,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_cmake_targets_defined "")
 set(_cmake_targets_not_defined "")
 set(_cmake_expected_targets "")
-foreach(_cmake_expected_target IN ITEMS zlib libjpeg-turbo ittnotify opencv_core opencv_imgproc opencv_features2d)
+foreach(_cmake_expected_target IN ITEMS zlib libjpeg-turbo libtiff libwebp libopenjp2 libpng IlmImf ittnotify opencv_core opencv_flann opencv_imgproc opencv_features2d opencv_imgcodecs ocv.3rdparty.dshow ocv.3rdparty.msmf ocv.3rdparty.ffmpeg ocv.3rdparty.obsensor opencv_videoio opencv_calib3d ocv.3rdparty.win32ui opencv_highgui opencv_video)
   list(APPEND _cmake_expected_targets "${_cmake_expected_target}")
   if(TARGET "${_cmake_expected_target}")
     list(APPEND _cmake_targets_defined "${_cmake_expected_target}")
@@ -61,6 +61,37 @@ add_library(zlib STATIC IMPORTED)
 # Create imported target libjpeg-turbo
 add_library(libjpeg-turbo STATIC IMPORTED)
 
+# Create imported target libtiff
+add_library(libtiff STATIC IMPORTED)
+
+set_target_properties(libtiff PROPERTIES
+  INTERFACE_LINK_LIBRARIES "zlib"
+)
+
+# Create imported target libwebp
+add_library(libwebp STATIC IMPORTED)
+
+# Create imported target libopenjp2
+add_library(libopenjp2 STATIC IMPORTED)
+
+set_target_properties(libopenjp2 PROPERTIES
+  INTERFACE_COMPILE_DEFINITIONS "OPJ_STATIC"
+)
+
+# Create imported target libpng
+add_library(libpng STATIC IMPORTED)
+
+set_target_properties(libpng PROPERTIES
+  INTERFACE_LINK_LIBRARIES "zlib"
+)
+
+# Create imported target IlmImf
+add_library(IlmImf STATIC IMPORTED)
+
+set_target_properties(IlmImf PROPERTIES
+  INTERFACE_LINK_LIBRARIES "zlib"
+)
+
 # Create imported target ittnotify
 add_library(ittnotify STATIC IMPORTED)
 
@@ -69,6 +100,13 @@ add_library(opencv_core STATIC IMPORTED)
 
 set_target_properties(opencv_core PROPERTIES
   INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:zlib>;\$<LINK_ONLY:ittnotify>"
+)
+
+# Create imported target opencv_flann
+add_library(opencv_flann STATIC IMPORTED)
+
+set_target_properties(opencv_flann PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_core;\$<LINK_ONLY:Eigen3::Eigen>"
 )
 
 # Create imported target opencv_imgproc
@@ -82,7 +120,78 @@ set_target_properties(opencv_imgproc PROPERTIES
 add_library(opencv_features2d STATIC IMPORTED)
 
 set_target_properties(opencv_features2d PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc;\$<LINK_ONLY:Eigen3::Eigen>"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_flann;opencv_imgproc;opencv_core;opencv_flann;opencv_imgproc;\$<LINK_ONLY:Eigen3::Eigen>"
+)
+
+# Create imported target opencv_imgcodecs
+add_library(opencv_imgcodecs STATIC IMPORTED)
+
+set_target_properties(opencv_imgcodecs PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc;\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:libjpeg-turbo>;\$<LINK_ONLY:libwebp>;\$<LINK_ONLY:libpng>;\$<LINK_ONLY:libtiff>;\$<LINK_ONLY:libopenjp2>;\$<LINK_ONLY:IlmImf>;\$<LINK_ONLY:zlib>"
+)
+
+# Create imported target ocv.3rdparty.dshow
+add_library(ocv.3rdparty.dshow INTERFACE IMPORTED)
+
+set_target_properties(ocv.3rdparty.dshow PROPERTIES
+  INTERFACE_COMPILE_DEFINITIONS "HAVE_DSHOW"
+)
+
+# Create imported target ocv.3rdparty.msmf
+add_library(ocv.3rdparty.msmf INTERFACE IMPORTED)
+
+set_target_properties(ocv.3rdparty.msmf PROPERTIES
+  INTERFACE_COMPILE_DEFINITIONS "HAVE_MSMF;HAVE_MSMF_DXVA"
+)
+
+# Create imported target ocv.3rdparty.ffmpeg
+add_library(ocv.3rdparty.ffmpeg INTERFACE IMPORTED)
+
+set_target_properties(ocv.3rdparty.ffmpeg PROPERTIES
+  INTERFACE_COMPILE_DEFINITIONS "HAVE_FFMPEG_WRAPPER"
+)
+
+# Create imported target ocv.3rdparty.obsensor
+add_library(ocv.3rdparty.obsensor INTERFACE IMPORTED)
+
+set_target_properties(ocv.3rdparty.obsensor PROPERTIES
+  INTERFACE_COMPILE_DEFINITIONS "HAVE_OBSENSOR;HAVE_OBSENSOR_MSMF"
+)
+
+# Create imported target opencv_videoio
+add_library(opencv_videoio STATIC IMPORTED)
+
+set_target_properties(opencv_videoio PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_imgcodecs;opencv_core;opencv_imgproc;opencv_imgcodecs;\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:ocv.3rdparty.dshow>;\$<LINK_ONLY:ocv.3rdparty.msmf>;\$<LINK_ONLY:ocv.3rdparty.ffmpeg>;\$<LINK_ONLY:ocv.3rdparty.obsensor>"
+)
+
+# Create imported target opencv_calib3d
+add_library(opencv_calib3d STATIC IMPORTED)
+
+set_target_properties(opencv_calib3d PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_flann;opencv_imgproc;opencv_features2d;opencv_core;opencv_flann;opencv_imgproc;opencv_features2d;\$<LINK_ONLY:Eigen3::Eigen>"
+)
+
+# Create imported target ocv.3rdparty.win32ui
+add_library(ocv.3rdparty.win32ui INTERFACE IMPORTED)
+
+set_target_properties(ocv.3rdparty.win32ui PROPERTIES
+  INTERFACE_COMPILE_DEFINITIONS "HAVE_WIN32UI"
+  INTERFACE_LINK_LIBRARIES "user32;gdi32"
+)
+
+# Create imported target opencv_highgui
+add_library(opencv_highgui STATIC IMPORTED)
+
+set_target_properties(opencv_highgui PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_imgcodecs;opencv_videoio;opencv_core;opencv_imgproc;opencv_imgcodecs;opencv_videoio;\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:comctl32>;\$<LINK_ONLY:gdi32>;\$<LINK_ONLY:ole32>;\$<LINK_ONLY:setupapi>;\$<LINK_ONLY:ws2_32>;\$<LINK_ONLY:ocv.3rdparty.win32ui>"
+)
+
+# Create imported target opencv_video
+add_library(opencv_video STATIC IMPORTED)
+
+set_target_properties(opencv_video PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_flann;opencv_imgproc;opencv_features2d;opencv_calib3d;opencv_core;opencv_flann;opencv_imgproc;opencv_features2d;opencv_calib3d;\$<LINK_ONLY:Eigen3::Eigen>"
 )
 
 # Load information for each installed configuration.
