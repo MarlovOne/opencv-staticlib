@@ -16,29 +16,25 @@ install_opencv_macos() {
   cmake -G Xcode \
     -S opencv \
     -B ./build/macOS/opencv \
-    -DBUILD_LIST=core,imgproc,features2d,flann,calib3d \
+    -DCPU_BASELINE="" \
+    -DCPU_DISPATCH="" \
+    -DWITH_IPP=OFF \
+    -DBUILD_opencv_apps=OFF \
+    -DBUILD_LIST=core,imgproc,features2d,flann,calib3d,videoio,video,highgui \
     -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_SHARED_LIBS=OFF \
     -DBUILD_opencv_flann=ON \
     -DBUILD_opencv_calib3d=ON \
-    -DBUILD_opencv_features2d=ON \
     -DBUILD_opencv_dnn=OFF \
+    -DBUILD_opencv_features2d=ON \
     -DBUILD_opencv_photo=OFF \
     -DBUILD_opencv_objdetect=OFF \
     -DBUILD_opencv_ml=OFF \
-    -DBUILD_opencv_video=OFF \
-    -DBUILD_opencv_videoio=OFF \
-    -DBUILD_opencv_highgui=OFF \
+    -DBUILD_opencv_video=ON \
+    -DBUILD_opencv_videoio=ON \
+    -DBUILD_opencv_highgui=ON \
     -DBUILD_opencv_gapi=OFF \
-    -DBUILD_PROTOBUFF=OFF \
-    -DWITH_ADE=OFF \
-    -DWITH_PROTOBUF=OFF \
     -DWITH_CAROTENE=OFF \
-    -DWITH_TIFF=OFF \
-    -DWITH_PNG=OFF \
-    -DWITH_OPENEXR=OFF \
-    -DWITH_OPENJPEG=OFF \
-    -DWITH_WEBP=OFF \
     -DWITH_JASPER=OFF \
     -DWITH_IMGCODEC_HDR=OFF \
     -DWITH_IMGCODEC_PFM=OFF \
@@ -49,8 +45,17 @@ install_opencv_macos() {
     -DBUILD_TESTS=OFF \
     -DBUILD_PERF_TESTS=OFF \
     -DBUILD_DOCS=OFF \
+    -DBUILD_OPENEXR=ON \
+    -DBUILD_JPEG=ON \
+    -DBUILD_PNG=ON \
+    -DBUILD_ZLIB=ON \
+    -DBUILD_TIFF=ON \
+    -DBUILD_OPENJPEG=ON \
+    -DBUILD_WEBP=ON \
+    -DBUILD_PROTOBUFF=OFF \
+    -DWITH_PROTOBUF=OFF \
+    -DWITH_ADE=OFF \
     -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
-
   # Run CMake and build
   cmake --build ./build/macOS/opencv --verbose --config Release
   cmake --install ./build/macOS/opencv --prefix ./arm64-x64
