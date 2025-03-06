@@ -44,13 +44,12 @@ function Install-OpenCV {
     if ($ARCH -eq "ARM64") {
         cmake -S opencv -B $BuildDir `
             -G "Visual Studio 17 2022" `
+            -T ClangCL `
             -A ARM64 `
+            -DWITH_IPP=OFF `
             -DBUILD_TESTING=OFF `
             -DCMAKE_BUILD_TYPE=Release `
             -DCMAKE_SYSTEM_PROCESSOR=ARM64 `
-            -DCPU_BASELINE="" `
-            -DCPU_DISPATCH="" `
-            -DWITH_IPP=OFF `
             -DBUILD_LIST="core,imgproc,features2d,flann,calib3d,videoio,video,highgui" `
             -DCMAKE_BUILD_TYPE=Release `
             -DOPENCV_GENERATE_PKGCONFIG=ON `
@@ -80,11 +79,13 @@ function Install-OpenCV {
             -DBUILD_DOCS=OFF `
             -DBUILD_OPENEXR=ON `
             -DBUILD_JPEG=ON `
-            -DBUILD_PNG=ON `
+            -DBUILD_PNG=OFF `
+            -DWITH_PNG=OFF `
             -DBUILD_ZLIB=ON `
             -DBUILD_TIFF=ON `
             -DBUILD_OPENJPEG=ON `
-            -DBUILD_WEBP=ON `
+            -DWITH_WEBP=OFF `
+            -DBUILD_WEBP=OFF `
             -DBUILD_PROTOBUFF=OFF `
             -DWITH_PROTOBUF=OFF `
             -DWITH_ADE=OFF
@@ -92,11 +93,10 @@ function Install-OpenCV {
     else {
         cmake -S opencv -B $BuildDir `
             -G "Visual Studio 17 2022" `
+            -T ClangCL `
             -DBUILD_TESTING=OFF `
-            -DCMAKE_BUILD_TYPE=Release `
-            -DCPU_BASELINE="" `
-            -DCPU_DISPATCH="" `
             -DWITH_IPP=OFF `
+            -DCMAKE_BUILD_TYPE=Release `
             -DBUILD_LIST="core,imgproc,features2d,flann,calib3d,videoio,video,highgui" `
             -DCMAKE_BUILD_TYPE=Release `
             -DOPENCV_GENERATE_PKGCONFIG=ON `
@@ -130,7 +130,8 @@ function Install-OpenCV {
             -DBUILD_ZLIB=ON `
             -DBUILD_TIFF=ON `
             -DBUILD_OPENJPEG=ON `
-            -DBUILD_WEBP=ON `
+            -DWITH_WEBP=OFF `
+            -DBUILD_WEBP=OFF `
             -DBUILD_PROTOBUFF=OFF `
             -DWITH_PROTOBUF=OFF `
             -DWITH_ADE=OFF
@@ -148,7 +149,7 @@ function Install-OpenCV {
 }
 
 # Build for both architectures
-Install-OpenCV -ARCH "x64"
+# Install-OpenCV -ARCH "x64"
 Install-OpenCV -ARCH "ARM64"
 
 # Return to the original directory

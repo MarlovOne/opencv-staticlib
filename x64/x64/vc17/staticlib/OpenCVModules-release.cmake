@@ -35,16 +35,6 @@ set_target_properties(libtiff PROPERTIES
 list(APPEND _cmake_import_check_targets libtiff )
 list(APPEND _cmake_import_check_files_for_libtiff "${_IMPORT_PREFIX}/x64/vc17/staticlib/libtiff.lib" )
 
-# Import target "libwebp" for configuration "Release"
-set_property(TARGET libwebp APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(libwebp PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "C"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/x64/vc17/staticlib/libwebp.lib"
-  )
-
-list(APPEND _cmake_import_check_targets libwebp )
-list(APPEND _cmake_import_check_files_for_libwebp "${_IMPORT_PREFIX}/x64/vc17/staticlib/libwebp.lib" )
-
 # Import target "libopenjp2" for configuration "Release"
 set_property(TARGET libopenjp2 APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(libopenjp2 PROPERTIES

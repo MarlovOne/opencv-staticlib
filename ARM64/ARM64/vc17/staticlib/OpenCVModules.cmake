@@ -7,7 +7,7 @@ if(CMAKE_VERSION VERSION_LESS "3.0.0")
    message(FATAL_ERROR "CMake >= 3.0.0 required")
 endif()
 cmake_policy(PUSH)
-cmake_policy(VERSION 3.0.0...3.27)
+cmake_policy(VERSION 3.0.0...3.28)
 #----------------------------------------------------------------
 # Generated CMake target import file.
 #----------------------------------------------------------------
@@ -19,7 +19,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_cmake_targets_defined "")
 set(_cmake_targets_not_defined "")
 set(_cmake_expected_targets "")
-foreach(_cmake_expected_target IN ITEMS zlib libjpeg-turbo libtiff libwebp libopenjp2 libpng IlmImf ittnotify opencv_core opencv_flann opencv_imgproc opencv_features2d opencv_imgcodecs ocv.3rdparty.dshow ocv.3rdparty.msmf ocv.3rdparty.ffmpeg ocv.3rdparty.obsensor opencv_videoio opencv_calib3d ocv.3rdparty.win32ui opencv_highgui opencv_video)
+foreach(_cmake_expected_target IN ITEMS zlib libjpeg-turbo libtiff libopenjp2 IlmImf ittnotify opencv_core opencv_flann opencv_imgproc opencv_features2d opencv_imgcodecs ocv.3rdparty.dshow ocv.3rdparty.msmf ocv.3rdparty.ffmpeg ocv.3rdparty.obsensor opencv_videoio opencv_calib3d ocv.3rdparty.win32ui opencv_highgui opencv_video)
   list(APPEND _cmake_expected_targets "${_cmake_expected_target}")
   if(TARGET "${_cmake_expected_target}")
     list(APPEND _cmake_targets_defined "${_cmake_expected_target}")
@@ -68,21 +68,11 @@ set_target_properties(libtiff PROPERTIES
   INTERFACE_LINK_LIBRARIES "zlib"
 )
 
-# Create imported target libwebp
-add_library(libwebp STATIC IMPORTED)
-
 # Create imported target libopenjp2
 add_library(libopenjp2 STATIC IMPORTED)
 
 set_target_properties(libopenjp2 PROPERTIES
   INTERFACE_COMPILE_DEFINITIONS "OPJ_STATIC"
-)
-
-# Create imported target libpng
-add_library(libpng STATIC IMPORTED)
-
-set_target_properties(libpng PROPERTIES
-  INTERFACE_LINK_LIBRARIES "zlib"
 )
 
 # Create imported target IlmImf
@@ -127,7 +117,7 @@ set_target_properties(opencv_features2d PROPERTIES
 add_library(opencv_imgcodecs STATIC IMPORTED)
 
 set_target_properties(opencv_imgcodecs PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc;\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:libjpeg-turbo>;\$<LINK_ONLY:libwebp>;\$<LINK_ONLY:libpng>;\$<LINK_ONLY:libtiff>;\$<LINK_ONLY:libopenjp2>;\$<LINK_ONLY:IlmImf>;\$<LINK_ONLY:zlib>"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc;\$<LINK_ONLY:Eigen3::Eigen>;\$<LINK_ONLY:libjpeg-turbo>;\$<LINK_ONLY:libtiff>;\$<LINK_ONLY:libopenjp2>;\$<LINK_ONLY:IlmImf>;\$<LINK_ONLY:zlib>"
 )
 
 # Create imported target ocv.3rdparty.dshow

@@ -107,7 +107,7 @@
 /* #undef HAVE_OPENGL */
 
 /* PNG codec */
-#define HAVE_PNG
+/* #undef HAVE_PNG */
 
 /* PNG codec */
 /* #undef HAVE_SPNG */
