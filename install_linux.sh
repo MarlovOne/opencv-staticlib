@@ -10,7 +10,7 @@ install_opencv_linux() {
   git clone --depth 1 --branch 4.11.0 https://github.com/opencv/opencv.git
 
   # ARCHS=("x86_64" "aarch64")
-  ARCHS=("aarch64")
+  ARCHS=("x86_64")
 
   for ARCH in "${ARCHS[@]}"; do
     rm -rf ./build/Linux/opencv/$ARCH
@@ -61,6 +61,7 @@ install_opencv_linux() {
         -DWITH_ADE=OFF \
         -DWITH_GSTREAMER=ON \
         -DWITH_FFMPEG=OFF \
+        -DWITH_IPP=OFF \
         -DWITH_GTK=ON \
         -DCMAKE_TOOLCHAIN_FILE=$(pwd)/linux-arm64.cmake
  

@@ -18,7 +18,7 @@ list(APPEND _cmake_import_check_files_for_zlib "${_IMPORT_PREFIX}/lib/opencv4/3r
 # Import target "libjpeg-turbo" for configuration "Release"
 set_property(TARGET libjpeg-turbo APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(libjpeg-turbo PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "C"
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "ASM_NASM;C"
   IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/opencv4/3rdparty/liblibjpeg-turbo.a"
   )
 
