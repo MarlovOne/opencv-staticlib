@@ -85,6 +85,7 @@ install_opencv_linux() {
         -DWITH_FFMPEG=OFF \
         -DWITH_PROTOBUF=OFF \
         -DWITH_ADE=OFF \
+        -DWITH_IPP=OFF \
         -DWITH_GTK=ON
 
     else 

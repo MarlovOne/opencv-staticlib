@@ -75,16 +75,6 @@ set_target_properties(IlmImf PROPERTIES
 list(APPEND _cmake_import_check_targets IlmImf )
 list(APPEND _cmake_import_check_files_for_IlmImf "${_IMPORT_PREFIX}/lib/opencv4/3rdparty/libIlmImf.a" )
 
-# Import target "ippiw" for configuration "Release"
-set_property(TARGET ippiw APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(ippiw PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "C"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/opencv4/3rdparty/libippiw.a"
-  )
-
-list(APPEND _cmake_import_check_targets ippiw )
-list(APPEND _cmake_import_check_files_for_ippiw "${_IMPORT_PREFIX}/lib/opencv4/3rdparty/libippiw.a" )
-
 # Import target "ittnotify" for configuration "Release"
 set_property(TARGET ittnotify APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(ittnotify PROPERTIES
